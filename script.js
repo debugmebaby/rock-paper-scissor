@@ -17,14 +17,14 @@ function playGame() {
   function getHumanChoice() {
       let userInput = "";
       while (userInput !== "rock" && userInput !== "paper" && userInput !== "scissors") {
-          userInput = prompt("Choose rock, paper, or scissors");
+          userInput = prompt("Choose rock, paper or scissors");
           if (userInput === null) {
               alert("Game cancelled.");
               return null;
           }
           userInput = userInput.trim().toLowerCase();
           if (userInput !== "rock" && userInput !== "paper" && userInput !== "scissors") {
-              alert("Invalid choice! Please enter rock, paper, or scissors.");
+              alert("Invalid choice! Please enter rock, paper or scissors.");
           }
       }
       return userInput;
