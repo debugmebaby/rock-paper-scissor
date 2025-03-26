@@ -5,6 +5,7 @@ else if (randomIndex ===1){ return 'paper';}
 else{return 'scissors';}
 }
 
+//make a prompt popup
 function getHumanChoice () {
 const userInput = prompt ("choose rock,paper or scissors") .toLowerCase();
 return userInput;
@@ -22,7 +23,7 @@ function playGame() {
       console.log(`You chose: ${humanChoice}`);
       console.log(`Computer chose: ${computerChoice}`);
   
-      
+      //values of all choices,what beats what
       if (humanChoice === computerChoice) {
         console.log("It's a tie!");
       } else if (
@@ -41,7 +42,7 @@ function playGame() {
       console.log(`Score - You: ${humanScore}, Computer: ${computerScore}`);
     }
   
-   
+   // make it a 5 round game
     for (let i = 0; i < 5; i++) {
       const humanChoice = getHumanChoice(); 
       const computerChoice = getComputerChoice();
@@ -49,7 +50,7 @@ function playGame() {
       playRound(humanChoice, computerChoice);
     }
   
-    
+    //make the desicinons count
     if (humanScore > computerScore) {
       console.log(`You win the game! Final score: You: ${humanScore}, Computer: ${computerScore}`);
     } else if (computerScore > humanScore) {
