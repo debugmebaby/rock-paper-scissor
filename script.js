@@ -7,7 +7,7 @@ else{return 'scissors';}
 
 //make a prompt popup
 function getHumanChoice () {
-const userInput = prompt ("choose rock,paper or scissors") .toLowerCase();
+const userInput = prompt ("choose rock,paper or scissors").toLowerCase();
 return userInput;
 }
 
