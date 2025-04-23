@@ -51,15 +51,6 @@ function playGame() {
       alert(resultMessage);
   }
 
-  for (let i = 0; i < 5; i++) {
-      const humanChoice = getHumanChoice();
-      if (humanChoice === null) {
-          return; // Avbryter spelet om spelaren stänger prompten
-      }
-      const computerChoice = getComputerChoice();
-      playRound(humanChoice, computerChoice);
-  }
-
   let finalMessage;
   if (humanScore > computerScore) {
       finalMessage = `You win the game! Final score: You: ${humanScore}, Computer: ${computerScore}`;
