@@ -2,20 +2,20 @@ function getComputerChoice() {
   const choices = ["rock", "paper", "scissors"];
   return choices[Math.floor(Math.random() * choices.length)];
 }
-//resultatet
+
 let humanScore = 0;
 let computerScore = 0;
 
-//knappar för resultat och score
 const resultsContainer = document.querySelector("#results");
 const scoreContainer = document.querySelector("#score");
+const playAgainButton = document.querySelector("#play-again");
 
-// själva funktionen per runda
 function playRound(humanChoice, computerChoice) {
-  resultsContainer.textContent = ""; // Rensa tidigare resultat
+  resultsContainer.textContent = ""; // Töm tidigare resultat
 
   const roundResult = document.createElement("p");
   roundResult.textContent = `You chose: ${humanChoice} | Computer chose: ${computerChoice}`;
+  resultsContainer.appendChild(roundResult);
 
   const outcome = document.createElement("p");
 
@@ -33,38 +33,36 @@ function playRound(humanChoice, computerChoice) {
     computerScore++;
   }
 
-  //själva score uppdateringen
-  const scoreUpdate = `Score - You: ${humanScore}, Computer: ${computerScore}`;
-  scoreContainer.textContent = scoreUpdate;
-
-  resultsContainer.appendChild(roundResult);
   resultsContainer.appendChild(outcome);
 
-  // Visa vinnaren när någon når 5
+  scoreContainer.textContent = `Score - You: ${humanScore}, Computer: ${computerScore}`;
+
   if (humanScore === 5 || computerScore === 5) {
     const finalMessage = document.createElement("p");
     finalMessage.style.fontWeight = "bold";
-    finalMessage.textContent =
-      humanScore === 5
-        ? "🎉 You won the game!"
-        : "💀 Computer won the game!";
+    finalMessage.textContent = humanScore === 5
+      ? "🎉 You won the game!"
+      : "💀 Computer won the game!";
     resultsContainer.appendChild(finalMessage);
 
-    // stänger av  knappar efter spelet är slut
-    document.querySelectorAll("button").forEach((btn) => {
-      btn.disabled = true;
-    });
+    document.querySelectorAll(".choice").forEach((btn) => btn.disabled = true);
+    playAgainButton.style.display = "inline-block";
   }
 }
 
-// Eventlisteners för knapparna
-// Välj alla knappar med klassen "choice"
-const buttons = document.querySelectorAll(".choice");
-
-buttons.forEach((button) => {
+document.querySelectorAll(".choice").forEach((button) => {
   button.addEventListener("click", () => {
     const humanChoice = button.dataset.choice;
     const computerChoice = getComputerChoice();
     playRound(humanChoice, computerChoice);
   });
+});
+
+playAgainButton.addEventListener("click", () => {
+  humanScore = 0;
+  computerScore = 0;
+  scoreContainer.textContent = "Score - You: 0, Computer: 0";
+  resultsContainer.textContent = "";
+  playAgainButton.style.display = "none";
+  document.querySelectorAll(".choice").forEach((btn) => btn.disabled = false);
 });
