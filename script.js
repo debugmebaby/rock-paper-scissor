@@ -2,13 +2,15 @@ function getComputerChoice() {
   const choices = ["rock", "paper", "scissors"];
   return choices[Math.floor(Math.random() * choices.length)];
 }
-
+//resultatet
 let humanScore = 0;
 let computerScore = 0;
 
+//knappar för resultat och score
 const resultsContainer = document.querySelector("#results");
 const scoreContainer = document.querySelector("#score");
 
+// själva funktionen per runda
 function playRound(humanChoice, computerChoice) {
   resultsContainer.textContent = ""; // Rensa tidigare resultat
 
@@ -31,6 +33,7 @@ function playRound(humanChoice, computerChoice) {
     computerScore++;
   }
 
+  //själva score uppdateringen
   const scoreUpdate = `Score - You: ${humanScore}, Computer: ${computerScore}`;
   scoreContainer.textContent = scoreUpdate;
 
@@ -47,7 +50,7 @@ function playRound(humanChoice, computerChoice) {
         : "💀 Computer won the game!";
     resultsContainer.appendChild(finalMessage);
 
-    // Inaktivera knappar efter spelet är klart
+    // stänger av  knappar efter spelet är slut
     document.querySelectorAll("button").forEach((btn) => {
       btn.disabled = true;
     });
@@ -55,12 +58,13 @@ function playRound(humanChoice, computerChoice) {
 }
 
 // Eventlisteners för knapparna
-document.querySelector("#rock").addEventListener("click", () => {
-  playRound("rock", getComputerChoice());
-});
-document.querySelector("#paper").addEventListener("click", () => {
-  playRound("paper", getComputerChoice());
-});
-document.querySelector("#scissors").addEventListener("click", () => {
-  playRound("scissors", getComputerChoice());
+// Välj alla knappar med klassen "choice"
+const buttons = document.querySelectorAll(".choice");
+
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const humanChoice = button.dataset.choice;
+    const computerChoice = getComputerChoice();
+    playRound(humanChoice, computerChoice);
+  });
 });
