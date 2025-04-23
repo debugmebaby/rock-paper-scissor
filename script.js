@@ -9,12 +9,8 @@ function getComputerChoice() {
       return 'scissors';
   }
 }
-
-function playGame() {
-  let humanScore = 0;
-  let computerScore = 0;
-
-
+let humanScore = 0;
+let computerScore = 0;
 
   function playRound(humanChoice, computerChoice) {
       let resultMessage = `You chose: ${humanChoice}\nComputer chose: ${computerChoice}\n`;
@@ -34,19 +30,18 @@ function playGame() {
       }
 
       resultMessage += `\nScore - You: ${humanScore}, Computer: ${computerScore}`;
-      alert(resultMessage);
+       
+      document.getElementById("results").innerHTML = resultMessage;
+      document.getElementById("score").textContent = `Score - You: ${humanScore}, Computer: ${computerScore}`;
   }
-
-  let finalMessage;
-  if (humanScore > computerScore) {
-      finalMessage = `You win the game! Final score: You: ${humanScore}, Computer: ${computerScore}`;
-  } else if (computerScore > humanScore) {
-      finalMessage = `You lose the game! Final score: You: ${humanScore}, Computer: ${computerScore}`;
-  } else {
-      finalMessage = `The game is a tie! Final score: You: ${humanScore}, Computer: ${computerScore}`;
-  }
-
-  alert(finalMessage);
-}
-
-playGame();
+  document.getElementById("rock").addEventListener("click", () => {
+    playRound("rock", getComputerChoice());
+  });
+  
+  document.getElementById("paper").addEventListener("click", () => {
+    playRound("paper", getComputerChoice());
+  });
+  
+  document.getElementById("scissors").addEventListener("click", () => {
+    playRound("scissors", getComputerChoice());
+  });
